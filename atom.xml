@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://tanhuanpei.github.io/"/>
   <updated>2018-07-27T07:16:19.523Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://tanhuanpei.github.io/</id>
   
   <author>
     <name>HuanPei Tan</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hexo简易教程</title>
-    <link href="http://yoursite.com/2018/09/20/Hexo%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/09/20/Hexo简易教程/</id>
+    <link href="https://tanhuanpei.github.io/2018/09/20/Hexo%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/"/>
+    <id>https://tanhuanpei.github.io/2018/09/20/Hexo简易教程/</id>
     <published>2018-09-20T12:24:48.319Z</published>
     <updated>2018-07-27T07:16:19.523Z</updated>
     
@@ -42,8 +42,8 @@
   
   <entry>
     <title>Android性能优化【ANR机制总结与问题分析】</title>
-    <link href="http://yoursite.com/2018/09/12/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%90ANR%E6%9C%BA%E5%88%B6%E6%80%BB%E7%BB%93%E4%B8%8E%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E3%80%91/"/>
-    <id>http://yoursite.com/2018/09/12/Android性能优化【ANR机制总结与问题分析】/</id>
+    <link href="https://tanhuanpei.github.io/2018/09/12/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%90ANR%E6%9C%BA%E5%88%B6%E6%80%BB%E7%BB%93%E4%B8%8E%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E3%80%91/"/>
+    <id>https://tanhuanpei.github.io/2018/09/12/Android性能优化【ANR机制总结与问题分析】/</id>
     <published>2018-09-12T12:36:22.000Z</published>
     <updated>2018-09-12T12:36:23.251Z</updated>
     
@@ -56,8 +56,8 @@
   
   <entry>
     <title>工具汇总</title>
-    <link href="http://yoursite.com/2018/08/01/%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/"/>
-    <id>http://yoursite.com/2018/08/01/工具汇总/</id>
+    <link href="https://tanhuanpei.github.io/2018/08/01/%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/"/>
+    <id>https://tanhuanpei.github.io/2018/08/01/工具汇总/</id>
     <published>2018-08-01T02:54:12.000Z</published>
     <updated>2018-08-01T02:55:20.967Z</updated>
     
@@ -78,8 +78,8 @@
   
   <entry>
     <title>Android性能优化【数据结构篇】</title>
-    <link href="http://yoursite.com/2018/07/27/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87%E3%80%91/"/>
-    <id>http://yoursite.com/2018/07/27/Android性能优化【数据结构篇】/</id>
+    <link href="https://tanhuanpei.github.io/2018/07/27/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87%E3%80%91/"/>
+    <id>https://tanhuanpei.github.io/2018/07/27/Android性能优化【数据结构篇】/</id>
     <published>2018-07-27T07:42:56.000Z</published>
     <updated>2018-07-27T07:42:56.239Z</updated>
     
@@ -92,8 +92,8 @@
   
   <entry>
     <title>使用AS开发gradle插件 (一)</title>
-    <link href="http://yoursite.com/2018/07/05/%E4%BD%BF%E7%94%A8AS%E5%BC%80%E5%8F%91gradle%E6%8F%92%E4%BB%B6%E5%85%A5%E9%97%A8/"/>
-    <id>http://yoursite.com/2018/07/05/使用AS开发gradle插件入门/</id>
+    <link href="https://tanhuanpei.github.io/2018/07/05/%E4%BD%BF%E7%94%A8AS%E5%BC%80%E5%8F%91gradle%E6%8F%92%E4%BB%B6%E5%85%A5%E9%97%A8/"/>
+    <id>https://tanhuanpei.github.io/2018/07/05/使用AS开发gradle插件入门/</id>
     <published>2018-07-05T11:45:51.000Z</published>
     <updated>2018-07-31T10:35:24.844Z</updated>
     
@@ -109,7 +109,7 @@
     </summary>
     
     
-      <category term="gradle插件" scheme="http://yoursite.com/tags/gradle%E6%8F%92%E4%BB%B6/"/>
+      <category term="gradle插件" scheme="https://tanhuanpei.github.io/tags/gradle%E6%8F%92%E4%BB%B6/"/>
     
   </entry>
   
