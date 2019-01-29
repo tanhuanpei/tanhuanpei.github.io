@@ -334,12 +334,12 @@
         
           
             <h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><p>HTTPS协议可以简单的认为是HTTP+TLS/SSL。<code>SSL（Secure Socket Layer）是安全套接层，TLS（Transport Layer Security）是传输层安全协议</code>，建立在SSL3.0协议规范，是SSL3.0的后续版本。当前最新使用的是TLS1.2协议。1.3版本还在草案阶段。</p>
-<p><img src="https://segmentfault.com/img/remote/1460000011675429" alt="image"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1460000011675429" alt="image"></p>
 <p>HTTPS 在 HTTP 下面提供了一个传输级的密码安全层——可以使用 SSL，也可以使用其后继者—— <code>传输层安全(Transport Layer Security，TLS)</code>。由于 SSL 和 TLS 非常类似，所以我们不太严格地用术语 SSL 来表示 SSL 和 TLS。</p>
-<p><img src="https://segmentfault.com/img/remote/1460000011675428?w=591&amp;h=233" alt="image"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/930623111-59ed85819d22b_articlex.png" alt="image"></p>
 <h4 id="TLS握手过程"><a href="#TLS握手过程" class="headerlink" title="TLS握手过程"></a>TLS握手过程</h4><p>在传输应用数据之前，客户端与服务端经过协商秘钥、加密算法等信息，服务端还要把自己的证书发送给客户端以表明身份，这些环节构成了TLS握手过程，如下两图所示：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/2111324-19f47f0a6829c6f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/409/format/webp" alt="img"></p>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/笔记/tsl-ssl.png" alt=""></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/tsl-ssl.png" alt=""></p>
 <h5 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h5><p>ClientHello【client -&gt; server】</p>
 <ol>
 <li>TLS版本</li>
@@ -349,7 +349,7 @@
 <li>压缩算法</li>
 <li>扩展字段，比如密码交换算法，请求主机名字等</li>
 </ol>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS握手过程详解与优化方法/1548387743050.png" alt="1548387743050"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548387743050.png" alt="1548387743050"></p>
 <h5 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h5><p>ServerHello【server -&gt; client】</p>
 <ol>
 <li><p>TLS版本</p>
@@ -359,7 +359,7 @@
 <li><p>确定的加密套件，压缩算法</p>
 </li>
 <li><p>扩展字段</p>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B8%8E%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1548388040046.png" alt="1548388040046"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548388040046.png" alt="1548388040046"></p>
 </li>
 </ol>
 <h5 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h5><p>Certificate, Server Key Exchange, Server Hello Done【server -&gt; client】</p>
@@ -368,7 +368,7 @@
 <li>Server Key Exchange，密钥交换算法和相关数据</li>
 <li>Server Hello Done，事件消息</li>
 </ul>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS握手过程详解与优化方法/1548397164402.png" alt="1548397164402"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548397164402.png" alt="1548397164402"></p>
 <h5 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h5><p>Client Key Exchange, Change Cipher Spec, <strong>Encrypted Handshake Message</strong>【client -&gt; server】</p>
 <ul>
 <li><p>Client Key Exchange，交换密钥参数</p>
@@ -382,7 +382,7 @@
 <p><strong>会话秘钥 = DES(random1+random2+rsa(ramdom3))</strong></p>
 </li>
 </ul>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS握手过程详解与优化方法/1548398905865.png" alt="1548398905865"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548398905865.png" alt="1548398905865"></p>
 <h5 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h5><p>New Session Ticket, Change Cipher Spec, <strong>Encrypted Handshake Message</strong>【server -&gt; client】</p>
 <ul>
 <li><p>New Session Ticket</p>
@@ -394,7 +394,7 @@
 <p>这一步对应的是Server Finish消息，服务端也会根据握手过程的消息生成摘要再用秘钥加密，这个服务端发出的第一条加密消息。客户端接收后会用秘钥解密，能解出来说明协商的秘钥是一直的。</p>
 </li>
 </ul>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS握手过程详解与优化方法/1548399295697.png" alt="1548399295697"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548399295697.png" alt="1548399295697"></p>
 <p>至此，双方SSL/TLS握手结束。</p>
 <h4 id="HTTPS优化"><a href="#HTTPS优化" class="headerlink" title="HTTPS优化"></a>HTTPS优化</h4><ul>
 <li><p>HTTP协议优化</p>
@@ -424,9 +424,9 @@
 </ul>
 <p>Okhttp中的<code>Realconnection</code>已支持session ticket。</p>
 <p>优化前</p>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B8%8E%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1548665022002.png" alt="1548665022002"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548665022002.png" alt="1548665022002"></p>
 <p>优化后</p>
-<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/home/tanhuanpei/Documents/hexo_blog/tanhuanpei.github.io/source/_posts/HTTPS%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%E4%B8%8E%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/1548665070317.png" alt="1548665070317"></p>
+<p><img src="/2019/01/29/HTTPS握手过程详解与优化方法/1548665070317.png" alt="1548665070317"></p>
 </li>
 </ol>
 </li>
