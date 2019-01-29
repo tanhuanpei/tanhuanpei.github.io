@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/29/HTTPS握手过程详解与优化方法/1548399295697.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/29/HTTPS握手过程详解与优化方法/1548665022002.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/29/HTTPS握手过程详解与优化方法/1548665070317.png">
-<meta property="og:updated_time" content="2019-01-29T08:56:37.040Z">
+<meta property="og:updated_time" content="2019-01-29T09:01:43.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPS握手过程详解与优化方法">
 <meta name="twitter:description" content="HTTPSHTTPS协议可以简单的认为是HTTP+TLS/SSL。SSL（Secure Socket Layer）是安全套接层，TLS（Transport Layer Security）是传输层安全协议，建立在SSL3.0协议规范，是SSL3.0的后续版本。当前最新使用的是TLS1.2协议。1.3版本还在草案阶段。  HTTPS 在 HTTP 下面提供了一个传输级的密码安全层——可以使用 SSL，">
@@ -478,12 +478,14 @@
 <li>Wireshark打开pcap文件</li>
 </ol>
 <h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><ul>
-<li><p>RTT(round-trip time)</p>
-</li>
-<li><p>对称算法 DES AES</p>
-</li>
-<li><p>非对称算法RSA DSA</p>
-</li>
+<li>RTT(round-trip time)</li>
+<li>对称算法 DES AES</li>
+<li>非对称算法RSA DSA</li>
+</ul>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><ul>
+<li><a href="https://imququ.com/post/optimize-tls-handshake.html" target="_blank" rel="noopener">TLS 握手优化详解</a></li>
+<li><a href="https://comsince.github.io/2017/06/14/http-over-ssl/" target="_blank" rel="noopener">HTTPS 原理以及优化实践</a></li>
+<li><a href="https://mp.weixin.qq.com/s/1YRhXOs61u8_fRU1wMaFyA?utm_source=androidweekly.cn&amp;utm_medium=website" target="_blank" rel="noopener">有货APP HTTPS优化探索和实践</a></li>
 </ul>
 
       
@@ -655,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.</span> <span class="nav-text">HTTPS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLS握手过程"><span class="nav-number">2.</span> <span class="nav-text">TLS握手过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一步"><span class="nav-number">2.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二步"><span class="nav-number">2.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三步"><span class="nav-number">2.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第四步"><span class="nav-number">2.4.</span> <span class="nav-text">第四步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第五步"><span class="nav-number">2.5.</span> <span class="nav-text">第五步</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS优化"><span class="nav-number">3.</span> <span class="nav-text">HTTPS优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WireShark配合tcpdump抓手机包"><span class="nav-number">4.</span> <span class="nav-text">WireShark配合tcpdump抓手机包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#名词解释"><span class="nav-number">5.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.</span> <span class="nav-text">HTTPS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLS握手过程"><span class="nav-number">2.</span> <span class="nav-text">TLS握手过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一步"><span class="nav-number">2.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二步"><span class="nav-number">2.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三步"><span class="nav-number">2.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第四步"><span class="nav-number">2.4.</span> <span class="nav-text">第四步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第五步"><span class="nav-number">2.5.</span> <span class="nav-text">第五步</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS优化"><span class="nav-number">3.</span> <span class="nav-text">HTTPS优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WireShark配合tcpdump抓手机包"><span class="nav-number">4.</span> <span class="nav-text">WireShark配合tcpdump抓手机包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#名词解释"><span class="nav-number">5.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
