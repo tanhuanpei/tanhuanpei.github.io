@@ -346,6 +346,57 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/25/Android面试知识点总结/" >
+            
+                <span>Android面试知识点总结</span>
+        </a>
+        <div class="abstract-content">
+            网络相关
+Https的原理？
+
+应用层和网络层增加了基于TLS协议的SSL层，通过TLS握手过程交换加密秘钥，后续传输内容使用秘钥进行对称加密，达到安全传输的目的。
+
+
+Http三次握手过程？
+
+client：syn=1，seq=x
+server：syn=1，ack=x+1，seq=y
+client：ack=y+1，seq=z
+
+
+Tcp和Udp的区别？
+
+Tcp面向链接，可靠的传输层协议。
+Udp是面向事务，简单不可靠传输层协议。
+
+
+Http的报文结构？cookie是用来干嘛的？有哪些响应码，分别都代表什么意思？
+
+请求头、请求行、请求数据，状态行、响应头、响应数据
+因为http是无...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "面试">面试</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/03/06/Android进阶之APT-in-Android/" >
             
                 <span>Android进阶之APT in Android</span>
@@ -596,37 +647,11 @@ LiveData的优点使用LiveData具有...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/05/使用AS开发gradle插件入门/" >
-            
-                <span>使用AS开发gradle插件 (一)</span>
-        </a>
-        <div class="abstract-content">
-            0X00 前言Gradle是一个使用Groovy语言实现的用于构建项目的框架。构建项目时真正起作用的是基于gradle框架使用Groovy实现的各种gradle插件。Gradle默认提供了很多插件，如Java-Plugin、Maven-Plugin等。Android Studio使用的是Android-Gradle-Plugin，由Google自主开发。在Android项目中，一个build.gradle文件，其实就是一个Groovy类。
-0X01 在项目中使用Android gradle插件配置插件路径，在Project目录中的build.gradle添加123dependencies...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "gradle插件">gradle插件</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -845,18 +870,9 @@ LiveData的优点使用LiveData具有...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 10
+        Total : 11
         </div>
         <!-- search  -->
         
@@ -869,6 +885,11 @@ LiveData的优点使用LiveData具有...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2019/03/25/Android面试知识点总结/" >Android面试知识点总结</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -943,6 +964,8 @@ LiveData的优点使用LiveData具有...
         <span class="sidebar-tag-name" data-tags="AspectJ 进阶"><span class="iconfont-archer">&#xe606;</span>AspectJ 进阶</span>
     
         <span class="sidebar-tag-name" data-tags="HTTPS 优化"><span class="iconfont-archer">&#xe606;</span>HTTPS 优化</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试"><span class="iconfont-archer">&#xe606;</span>面试</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
