@@ -136,50 +136,210 @@ New Session Ticket, Change Cipher Spec, **Encrypted Handshake Message**【server
   1. Session Resumption，会话复用
 
      - Session Id，服务端开启
-     - Session ticket，服务端支持，客户端开启
+  
+   - Session ticket，服务端支持，客户端开启
+  
+     在Android API文档中``SSLCertificateSocketFactory``提供了开启Session ticket的方法
+  
+     ```java
+       /**
+          * Enables <a href="http://tools.ietf.org/html/rfc5077#section-3.2">session ticket</a>
+            * support on the given socket.
+          *
+            * @param socket a socket created by this factory
+          * @param useSessionTickets {@code true} to enable session ticket support on this socket.
+            * @throws IllegalArgumentException if the socket was not created by this factory.
+          */
+           public void setUseSessionTickets(Socket socket, boolean useSessionTickets){
+             castToOpenSSLSocket(socket).setUseSessionTickets(useSessionTickets);
+           }
+     ```
+  
+       最终实现在[OpenSSLSocketImpl](https://android.googlesource.com/platform/external/conscrypt/+/f087968/src/main/java/org/conscrypt/OpenSSLSocketImpl.java?autodive=0%2F%2F%2F%2F)中，如下代码：
 
-     Okhttp中的`Realconnection`已支持session ticket。
+       ```java
+     /**
+            * This method enables session ticket support.
+          *
+            * @param useSessionTickets True to enable session tickets
+          */
+           public void setUseSessionTickets(boolean useSessionTickets) {
+             this.useSessionTickets = useSessionTickets;
+           }
+     ```
+  
+       需要使用的时候可以通过自定义SSLSocketFactory和反射来启动session ticket。
 
+       ```java
+     public class SSLExtensionSocketFactory extends SSLSocketFactory {
+           private String TAG = "TlsSessionTicket";
+         private SSLSocketFactory mDelegate;
+       
+         public SSLExtensionSocketFactory(Context context) {
+               try {
+                 SSLContext sslContext = SSLContext.getDefault();
+                   SSLSessionCache sslSessionCache;
+                 try {
+                       sslSessionCache =
+                               new SSLSessionCache(new File(Environment.getExternalStorageDirectory(), "sslCache"));
+                   } catch (IOException e) {
+                       DebugLogger.e(TAG, e.getMessage());
+                       sslSessionCache = new SSLSessionCache(context);
+                   }
+                   install(sslSessionCache,sslContext);
+                   mDelegate = sslContext.getSocketFactory();
+               } catch (Exception e) {
+                   DebugLogger.e(TAG,e.getMessage());
+                   mDelegate = (SSLSocketFactory) SSLSocketFactory.getDefault();
+               }
+           }
+       
+           private Socket makeSSLSocketSessionTicketSupport(Socket socket) {
+               if(socket instanceof SSLSocket) {
+                   setUseSessionTickets(socket);
+               }
+               return socket;
+           }
+           @Override
+           public String[] getDefaultCipherSuites() {
+               return mDelegate.getDefaultCipherSuites();
+           }
+       
+           @Override
+           public String[] getSupportedCipherSuites() {
+               return mDelegate.getSupportedCipherSuites();
+           }
+       
+           @Override
+           public Socket createSocket(Socket s, String host, int port, boolean autoClose) throws IOException {
+               return makeSSLSocketSessionTicketSupport(mDelegate.createSocket(s, host, port, autoClose));
+           }
+       
+           @Override
+           public Socket createSocket(String host, int port) throws IOException {
+               return makeSSLSocketSessionTicketSupport(mDelegate.createSocket(host, port));
+           }
+       
+           @Override
+           public Socket createSocket(String host, int port, InetAddress localHost, int localPort) throws IOException, UnknownHostException {
+               return makeSSLSocketSessionTicketSupport(mDelegate.createSocket(host, port, localHost, localPort));
+           }
+       
+           @Override
+           public Socket createSocket(InetAddress host, int port) throws IOException {
+               return makeSSLSocketSessionTicketSupport(mDelegate.createSocket(host, port));
+           }
+       
+           @Override
+           public Socket createSocket(InetAddress address, int port, InetAddress localAddress, int localPort) throws IOException {
+               return makeSSLSocketSessionTicketSupport(mDelegate.createSocket(address, port, localAddress, localPort));
+           }
+       
+           private void setUseSessionTickets(Socket socket){
+               Class c = socket.getClass();
+               try {
+                   Method m = c.getMethod("setUseSessionTickets",boolean.class);
+                   m.invoke(socket,true);
+               } catch (NoSuchMethodException e) {
+                   e.printStackTrace();
+               } catch (IllegalAccessException e) {
+                   e.printStackTrace();
+               } catch (IllegalArgumentException e) {
+                   e.printStackTrace();
+               } catch (InvocationTargetException e) {
+                   e.printStackTrace();
+               }
+           }
+       
+           private void install(SSLSessionCache sslSessionCache,SSLContext sslContext){
+               Class c = sslSessionCache.getClass();
+               try {
+                   Method method = c.getMethod("install", new Class<?>[] {SSLSessionCache.class, SSLContext.class});
+                   method.invoke(sslSessionCache,sslSessionCache,sslContext);
+               } catch (NoSuchMethodException e) {
+                   e.printStackTrace();
+               } catch (InvocationTargetException e) {
+                   e.printStackTrace();
+               } catch (IllegalAccessException e) {
+                   e.printStackTrace();
+               }
+           }
+       }
+       ```
+  
+       
+  
+       Okhttp中的`Realconnection`已默认开启session ticket。
+  
+       ```java
+       private void connectTls(ConnectionSpecSelector connectionSpecSelector) throws IOException {
+             ······
+             if (connectionSpec.supportsTlsExtensions()) {
+               Platform.get().configureTlsExtensions(
+                   sslSocket, address.url().host(), address.protocols());
+             }
+             ······
+         }
+       
+       
+         @Override public void configureTlsExtensions(
+             SSLSocket sslSocket, String hostname, List<Protocol> protocols) {
+           // Enable SNI and session tickets.
+           if (hostname != null) {
+             setUseSessionTickets.invokeOptionalWithoutCheckedException(sslSocket, true);
+             setHostname.invokeOptionalWithoutCheckedException(sslSocket, hostname);
+           }
+       
+           // Enable ALPN.
+           if (setAlpnProtocols != null && setAlpnProtocols.isSupported(sslSocket)) {
+             Object[] parameters = {concatLengthPrefixed(protocols)};
+             setAlpnProtocols.invokeWithoutCheckedException(sslSocket, parameters);
+           }
+         }
+       ```
+  
+       
+  
      优化前
-
+  
      ![1548665022002](/HTTPS握手过程详解与优化方法/1548665022002.png)
-
-     优化后
-
+  
+     优化后，减少一次证书交换、秘钥协商的请求
+  
      ![1548665070317](/HTTPS握手过程详解与优化方法/1548665070317.png)
-
+  
      
-
+  
   2. False Start
-
+  
      False Start是指客户端在发送Change CipherSpec Finished 同时发送应用数据(如HTTP请求)，服务端在TLS握手完成时直接返回应用数据。这样，应用数据的发送时机上未等到握手全部完成。开启FS之后，只需要一次RTT就可以开始传输数据，目前大部分浏览器默认都会支持启用，但也有一些前提条件：
-
+  
      - 服务端和客户端支持NPN或者ALPN
      - 服务器配置支持前向安全性(ForwardSecrecy)的加密算法
-
+  
      配置方法为服务器配置Nginx或者Apache开启。
-
+  
      
-
+  
   3. Certificate
-
+  
      证书实在握手期间发送的，由于TCP初始拥塞窗口的存在，如果证书太长可能会产生额外的往返开销。如果证书没包含中间证书，大部分浏览器可以正常工作，但会暂停验证并根据子证书指定的父证书URL自己获取中间证书。这个过程会产生额外的DNS解析、建立TCP连接等开销，非常影响性能。
-
+  
      配置证书的最佳实践：
-
+  
      - 证书链是只包含站点证书和中间证书，不要包含根证书，也不要漏掉中间证书。
      - 减少证书大小，使用ECC（Elliptic Curve Cryptography，椭圆曲线密码学）证书。256位的ECC Key等同与3072位的RSA Key，在确保安全性的同事，体积大幅减少。
-
+  
      
-
+  
   4. 开启OCSP Stapling
-
+  
      OCSP（Online Certificate Status Protocol，在线证书状态协议）是用来检验证书合法性的在线查询服务，一般由证书所属CA提供。某些客户端会在TLS握手阶段进一步协商时，实时查询OCSP接口，并在获得结果前阻塞后续流程。OCSP查询本质是一次完整的HTTP请求-响应，这中间的DNS查询、建立TCP、服务端处理等环节都可能耗费很长时间，导致最终建立TLS连接时间变得更长。
-
+  
      而OCSP Stapling，是指服务端主动获取OCSP查询结果并随证书一起发送给客户单，从而让客户端跳过自己验证的过程，提高TLS握手效率。
-
+  
      此过程由服务器Nginx配置开启。
-
+  
      
 
 #### WireShark配合tcpdump抓手机包
